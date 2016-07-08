@@ -1,0 +1,27 @@
+<div class="container">
+
+    <h1>Profile</h1>
+
+    <form (ngSubmit)="onUpdateProfile()" #regForm="ngForm">
+
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input id="name" value="{{current_user.name}}" type="text" [(ngModel)]="current_user.name" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" value="{{current_user.email}}" type="email" [(ngModel)]="current_user.email" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="skills">Skills</label>
+            <input maxlength="50" id="skills" type="text" value="{{get_skills}}" [(ngModel)]="skills" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-default" [disabled]="!regForm.form.valid">Submit</button>
+
+    </form>
+
+    <div class="alert alert-success" [hidden]="!profile_submitted">Changes saved!</div>
+</div>

@@ -1,0 +1,43 @@
+<div class="container" [hidden]="submitted">
+
+    <h1>Registration</h1>
+
+    <form (ngSubmit)="onSubmit()" #regForm="ngForm">
+        <div class="form-group">
+            <label for="login">Login</label>
+            <input id="login" type="text" [(ngModel)]="user.username" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" type="password" [(ngModel)]="user.password" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input id="name" type="text" [(ngModel)]="user.name" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" type="email" [(ngModel)]="user.email" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="type">Type</label>
+            <select id="type" class="form-control" [(ngModel)]="user.type" required>
+                <option *ngFor="#type of types" [value]="type">{{type}}</option>
+            </select>
+
+        </div>
+
+        <div class="form-group">
+            <label for="skills">Skills</label>
+            <input id="skills" maxlength="50" type="text" [(ngModel)]="skills" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-default" [disabled]="!regForm.form.valid">Submit</button>
+    </form>
+    <div class="alert alert-danger" [hidden]="!submit_error">Wrong username or email</div>
+    <div class="alert alert-success" [hidden]="!submitted">Registration done</div>
+</div>

@@ -1,0 +1,29 @@
+<nav class="nav navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <span class="navbar-brand">Mentors and Mentees</span>
+        </div>
+
+        <ul class="nav navbar-nav" [hidden]="!sessionToken" *ngIf="current_user">
+            <li *ngIf="current_user.type === 'mentee'"><a [routerLink]="['Users', {type: 'mentor'}]">Mentors</a></li>
+            <li *ngIf="current_user.type === 'mentor'"><a [routerLink]="['Users', {type: 'mentee'}]">Mentees</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right" [hidden]="sessionToken">
+            <li><a (click)="onShowLogin()">Sign In</a></li>
+            <li><a (click)="onShowRegistration()">Sign Up</a></li>
+        </ul>
+        <ul *ngIf="current_user" class="nav navbar-nav navbar-right">
+            <li><a [routerLink]="['Profile']">{{current_user.name}}</a></li>
+            <li><a (click)="logout()">LogOut</a></li>
+        </ul>
+    </div>
+</nav>
+<div id="notification" style="display: none;">
+    <span class="dismiss"><a title="dismiss this notification">x</a></span>
+</div>
+
+<login-form (onAuthorized)="onAuthorized($event)" [hidden]="!login_show" [authorized]="false" [submitted]="false"></login-form>
+<registration-form [hidden]="!registration_show"></registration-form>
+
+<router-outlet *ngIf="current_user"></router-outlet>

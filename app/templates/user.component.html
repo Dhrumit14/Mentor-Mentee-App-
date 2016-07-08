@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="col-md-8">
+        <h1>{{header}}</h1>
+        <div *ngIf="users">
+            <label for="skills">Skills</label>
+            {{skill_filter}}
+            <input id="skills" type="text" class="form-control" (change)="skillSearch()" [(ngModel)]="skill_filter">
+            <hr>
+            <div class="panel panel-primary" *ngFor="#user of users">
+                <div class="panel-heading">
+                    <span class="panel-title" style="">{{user.name}}</span>
+                    <div class="btn-group" style="float: right; margin-top: -5px">
+                        <button class="btn btn-default" (click)="detailSelect(user)">Detail</button>
+                        <button class="btn btn-default" (click)="selectUser(user)">Chat</button>
+                    </div>
+                </div>
+
+                <user-detail-component (onRateUpdated)="onRateUpdated()" [user]="detail_user" [user_id]="user._id"></user-detail-component>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h1>Messages</h1>
+
+        <div *ngIf="selected_user">
+            <chat-form [receiver_id]="selected_user._id" [socket]="socket"></chat-form>
+        </div>
+    </div>
+</div>

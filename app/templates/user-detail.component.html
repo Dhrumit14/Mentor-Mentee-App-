@@ -1,0 +1,22 @@
+<div *ngIf="user">
+    <div *ngIf="user._id === user_id" class="panel-body">
+        <div>
+            <span>Email: {{user.email}}</span>
+            <h3>
+                <span style="float: right; margin-top: -45px;" class="label label-success right">Rate: {{rate}}</span>
+            </h3>
+        </div>
+
+        <h3>
+            <span style="margin: 2px" class="label label-info" *ngFor="#skill of skills">{{skill}}</span>
+        </h3>
+
+        <form [hidden] = "rate_submitted">
+            <div class="form-group">
+                <label for="rate">Rate</label>
+                <input id="rate" style="width: 100px;" [(ngModel)]="outgo_rate" type="number" class="form-control" min="0" max="5" required>
+            </div>
+            <button type="submit" class="btn btn-default" (click)="OnVoite()">Set</button>
+        </form>
+    </div>
+</div>
